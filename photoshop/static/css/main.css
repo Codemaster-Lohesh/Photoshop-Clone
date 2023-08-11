@@ -1,0 +1,13 @@
+body{
+    min-height: 100vh;
+}
+
+.main-wrapper{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+.side-bar{
+    height: 100%;
+}

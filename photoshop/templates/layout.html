@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% if title %}
+        <title>Photoshop - {{title}}</title>
+    {% else %}
+        <title>Photoshop</title>
+    {% endif %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <div class="container">
+                <a href="" class="navbar-brand">Photoshop</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">About</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a href="{{ url_for('register') }}" class="nav-link">Register</a></li>
+                        <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        {% if current_user.is_authenticated %}
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <div class="container">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="{{ url_for('resize') }}" class="nav-link">Resize</a></li>
+                    <li class="nav-item"><a href="{{ url_for('blur') }}" class="nav-link">Gaussian Blur</a></li>
+                    <li class="nav-item"><a href="{{ url_for('filter') }}" class="nav-link">Filter</a></li>
+                    <li class="nav-item"><a href="{{ url_for('monochromatic') }}" class="nav-link">Monochromatic</a></li>
+                </ul>
+            </div>
+            
+        </nav>
+        
+        {% endif %}
+    </header>
+
+    <main class="main-wrapper">
+        <aside></aside>
+
+        <main class="main-content container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+            {% endwith %}
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <aside></aside>
+    </main>
+    
+</body>
+</html>

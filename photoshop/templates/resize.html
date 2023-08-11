@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        <legend>Upload File</legend>
+        <fieldset>
+            <div>
+                {{ form.resizeWidth.label(class="form-label") }}
+                {% if form.resizeWidth.errors %}
+                    {{ form.resizeWidth(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.resizeWidth.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.resizeWidth(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div>
+                {{ form.resizeHeight.label(class="form-label") }}
+                {% if form.resizeHeight.errors %}
+                    {{ form.resizeHeight(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.resizeHeight.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.resizeHeight(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-element">
+                {{ form.picture.label(class="form-label") }}
+                {{ form.picture(class="form-control-file") }}
+                {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                        </br><span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-element">
+            {{ form.submit(class="") }}
+        </div>
+    </form>
+{% endblock %}

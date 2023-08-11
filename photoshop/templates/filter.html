@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        <legend>Upload File</legend>
+        <fieldset>
+            <div>
+                {{ form.filter.label(class="form-label") }}
+                {% if form.filter.errors %}
+                    {{ form.filter(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.filter.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.filter(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-element">
+                {{ form.picture.label(class="form-label") }}
+                {{ form.picture(class="form-control-file") }}
+                {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                        </br><span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-element">
+            {{ form.submit(class="") }}
+        </div>
+    </form>
+{% endblock %}
